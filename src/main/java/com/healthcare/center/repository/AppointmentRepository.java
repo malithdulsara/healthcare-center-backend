@@ -7,6 +7,5 @@ import java.util.List;
 
 public interface AppointmentRepository extends JpaRepository<Appointment, Long> {
     List<Appointment> findByPatientId(Long patientId);
-
     int countByScheduleId(Long scheduleId);
 }

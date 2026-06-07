@@ -18,4 +18,5 @@ public interface AdminService {
     User registerStaff(StaffRegistrationDTO dto);
     List<User> getAllStaffMembers();
     void removeStaff(Long staffId);
+    Doctor updateDoctor(Long doctorId, DoctorRegistrationDTO dto);
 }

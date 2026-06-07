@@ -107,4 +107,34 @@ public class AdminServiceImpl implements AdminService {
 
         userRepository.deleteById(staffId);
     }
+
+    @Transactional
+    public Doctor updateDoctor(Long doctorId, DoctorRegistrationDTO dto) {
+        Doctor doctor = doctorRepository.findById(doctorId)
+                .orElseThrow(() -> new RuntimeException("Doctor not found!"));
+
+        User user = doctor.getUser();
+
+        if (!user.getEmail().equals(dto.getEmail()) && userRepository.findByEmail(dto.getEmail()).isPresent()) {
+            throw new RuntimeException("This email address is already in use!");
+        }
+
+        user.setName(dto.getName());
+        user.setEmail(dto.getEmail());
+        user.setPhoneNumber(dto.getPhoneNumber());
+
+        if (dto.getPassword() != null && !dto.getPassword().trim().isEmpty()) {
+            user.setPassword(passwordEncoder.encode(dto.getPassword()));
+        }
+        userRepository.save(user);
+
+        Specialization spec = specializationRepository.findById(dto.getSpecializationId())
+                .orElseThrow(() -> new RuntimeException("The provided Specialization ID is invalid!"));
+
+        doctor.setSpecialization(spec);
+        doctor.setMaxPatientsPerDay(dto.getMaxPatientsPerDay());
+
+        return doctorRepository.save(doctor);
+    }
+
 }

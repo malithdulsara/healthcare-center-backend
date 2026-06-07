@@ -59,6 +59,11 @@ public class AdminController {
     @DeleteMapping("/staff/{id}")
     public ResponseEntity<String> removeStaff(@PathVariable Long id) {
         adminService.removeStaff(id);
-        return ResponseEntity.ok("Staff සාමාජිකයා සාර්ථකව පද්ධතියෙන් ඉවත් කරන ලදී!");
+        return ResponseEntity.ok("The staff member has been successfully removed from the system!");
+    }
+
+    @PutMapping("/doctor/{id}")
+    public ResponseEntity<Doctor> updateDoctor(@PathVariable Long id, @RequestBody DoctorRegistrationDTO dto) {
+        return ResponseEntity.ok(adminService.updateDoctor(id, dto));
     }
 }

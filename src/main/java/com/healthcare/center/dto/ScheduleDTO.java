@@ -11,4 +11,5 @@ public class ScheduleDTO {
     private LocalDate availableDate;
     private LocalTime startTime;
     private LocalTime endTime;
+    private String roomNumber;
 }

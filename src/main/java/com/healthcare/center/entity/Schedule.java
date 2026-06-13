@@ -35,4 +35,6 @@ public class Schedule {
 
     @Column(name = "current_live_number")
     private int currentLiveNumber = 0;
+
+    private String roomNumber;
 }

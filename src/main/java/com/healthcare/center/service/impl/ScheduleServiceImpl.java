@@ -38,6 +38,7 @@ public class ScheduleServiceImpl implements ScheduleService {
         schedule.setStartTime(dto.getStartTime());
         schedule.setEndTime(dto.getEndTime());
         schedule.setCurrentLiveNumber(0);
+        schedule.setRoomNumber(dto.getRoomNumber());
 
         return scheduleRepository.save(schedule);
     }
